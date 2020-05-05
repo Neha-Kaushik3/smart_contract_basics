@@ -1,0 +1,36 @@
+pragma solidity>=0.5.11 <0.7.0;
+contract WorkingWithVariables {
+    
+
+    uint256 public myUint;                                         //there will be no error if we display myUint without setting it because it is by default initialized to 0;
+    function setMyUint(uint _myuint) public{
+        myUint=_myuint;
+    }
+    
+
+    bool public myBool;                                           //default value of bool is alaways false;
+    function setMybool(bool _myBool) public{                          // this value can be changed using setMybool;
+        myBool=_myBool;
+    }
+    uint8 public myUint8;                                   //uint8 represent a integer of size 8 ;
+    function incrementunit8() public{                               
+        myUint8++;
+    }
+    function decrementunit8() public{                       // since the default value is 0 ; if it is further decremented value become 255 instead of -1;
+        myUint8--;                                            // this is how intergers wrap around in solidity
+    }
+    address myaddress;                                       // addrerss public myaddress;<------->this can be used for direct display
+    function setaddress(address _address) public{
+        myaddress= _address;
+    }
+   function getaddress() public view returns (address){   
+       return myaddress;
+   } 
+   function getbalanceOfAccount() public view returns(uint){
+       return myaddress.balance;
+   }
+   string public mystring = 'hello world !';
+   function setmystring(string memory _mystring) public{   // keyword "memory" is important in order to specify storage location of string declared
+       mystring=_mystring;
+   }
+}
