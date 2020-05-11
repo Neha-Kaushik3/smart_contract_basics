@@ -8,8 +8,8 @@ contract WorkingWithVariables {
     }
     
 
-    bool public myBool;                                           //default value of bool is alaways false;
-    function setMybool(bool _myBool) public{                          // this value can be changed using setMybool;
+    bool public myBool;                         //default value of bool is alaways false;
+    function setMybool(bool _myBool) public{        // this value can be changed using setMybool
         myBool=_myBool;
     }
     uint8 public myUint8;                                   //uint8 represent a integer of size 8 ;
