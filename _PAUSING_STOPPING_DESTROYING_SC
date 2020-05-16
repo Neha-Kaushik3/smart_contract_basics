@@ -1,0 +1,36 @@
+pragma solidity >=0.5.11 <0.7.0;
+
+contract _PAUSING_STOPPING_DESTROYING_SC{
+
+    uint public transacted_money;
+
+    function SendMoney() public payable{                            //for calculating total amount transacted
+        transacted_money+= msg.value;
+    }
+
+    function Balance() public view returns(uint) {                   // dispalying current balance of the smartcontract
+        return address(this).balance;
+    }
+
+    address owner;                                                   
+    bool public pause;                                               //boolen pause id by default initialed to false during declaration
+
+    constructor() public{                                            //initializing the owner address (owner is only one allowed to pause ,stop or destroy)
+    owner=msg.sender;
+    }
+
+    function _setpause(bool _pause) public{                         //updating the value of "pause"
+        pause=_pause;
+    }
+                                                                     //require works as <require>((true)--execute,(false)---display)
+    function WithdrawAllMoney(address payable _to) public{
+        require(owner==msg.sender,"you are not the owner");          //stopping the samrtcontract
+        require(!pause,"contract is currently paused");              //pausing the smartcontract according to status of "pause"
+        _to.transfer(address(this).balance);                         //transfering money if contract is neither to be paused or stopped
+    }
+
+    function Destroy_smartcontract(address payable _to) public  {              
+        require(_to==owner,"you are not the owner , contract cannot be destroyed");
+         selfdestruct(_to);                                         //<selfdestruct> is used to destroy the smartcontract 
+    }
+}
